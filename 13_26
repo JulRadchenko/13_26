@@ -1,0 +1,21 @@
+import csv
+with open("titanic.csv", "r", encoding="latin-1") as f:
+    reader = csv.reader(f)
+    header = next(reader)
+    data = [row for row in reader]
+i_age = header.index('Age')
+i_price = header.index('Fare')
+age = []
+for p in data:
+    if p[i_age] != '':
+        age.append(p[i_age])
+maxi = int(max(age, key = age.count))
+min_int = maxi - 7
+max_int = maxi + 7
+sum = 0.0
+for p in data:
+    if p[i_age] != '' and float(p[i_age]) <= max_int and float(p[i_age]) >=min_int:
+        sum = sum + float(p[i_price])
+print("Мода: ",maxi)
+print(f"Интервал: {min_int} - {max_int}")
+print('Сумма стоимости билетов: ',sum)
